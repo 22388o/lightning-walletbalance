@@ -18,6 +18,7 @@ from os.path import join
 rpc = None
 plugin = Plugin(autopatch=True)
 
+
 @plugin.method("walletbalance")
 def walletbalance(plugin=None):
     """Compute and display the wallet's current balance."""
@@ -35,11 +36,13 @@ def walletbalance(plugin=None):
         "unconfirmed_balance": str(unconfirmed_balance)
     }
 
+
 @plugin.init()
 def init(options, configuration, plugin):
     global rpc
     plugin.log("walletbalance init")
     path = join(configuration["lightning-dir"], configuration["rpc-file"])
     rpc = LightningRpc(path)
+
 
 plugin.run()
